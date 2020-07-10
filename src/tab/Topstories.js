@@ -46,8 +46,10 @@ export default class TopStoriesTab extends Component {
 					overlayStyle={{
 						height: 466,
 						width: 300,
-						padding: 16
+						padding: 16,
+					
 					}}>
+						<>
 					<Image source={IMAGE.ICON_WELCOME} />
 					<Text style={styles.welcomeText}>Welcome to News</Text>
 					<Text>
@@ -65,7 +67,7 @@ export default class TopStoriesTab extends Component {
 					<Button onPress={() => this.setState({ isVisible: false })}
 						title="Browse" buttonStyle={{ backgroundColor: '#44464a', marginLeft: 16, marginRight: 16 }}
 					/>
-
+</>
 				</Overlay>
 
 				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

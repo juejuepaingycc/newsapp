@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Image } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,6 +10,8 @@ import { SwiperScreen, CustomDrawerContent } from './src';
 import { HomeScreen, SearchScreen, Detail } from './src/tab';
 import { SigninScreen, SignupScreen } from './src/auth';
 import { IMAGE } from './src/constants/image';
+
+const Tab = createBottomTabNavigator();
 
 const navOptionHandler = () => ({
   headerShown: false
@@ -23,7 +27,6 @@ function HomeStack() {
   );
 }
 
-const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator

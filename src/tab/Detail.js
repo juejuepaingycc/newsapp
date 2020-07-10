@@ -24,15 +24,15 @@ export class Detail extends Component {
     ]
 
     let { route, navigation } = this.props;
-    const { passdata } = route.params;
-    const time = moment(passdata.publishedAt || moment.now()).fromNow();
+    const { pass } = route.params;
+    const time = moment(pass.publishedAt || moment.now()).fromNow();
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <CustomHeader title="" navigation={navigation}></CustomHeader>
         <ScrollView style={styles.container}>
           <Image
-            source={{ uri: passdata.urlToImage }}
+            source={{ uri: pass.urlToImage }}
             style={{
               width: null,
               height: 200
@@ -40,14 +40,14 @@ export class Detail extends Component {
           />
           <View style={styles.upperText}>
             <Text style={styles.title}>
-              {passdata.title}
+              {pass.title}
             </Text>
             <View style={styles.author}>
               <Text style={styles.by}>
                 By&nbsp;
 	            </Text>
               <Text style={styles.authorName}>
-                {passdata.author}
+                {pass.author}
               </Text>
             </View>
             <Text style={styles.date}>
@@ -59,7 +59,7 @@ export class Detail extends Component {
 
           <View style={styles.detailText}>
             <Text style={styles.detail}>
-              {passdata.description}
+              {pass.description}
             </Text>
           </View>
 
