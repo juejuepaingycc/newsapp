@@ -4,7 +4,24 @@ NewsApp built using react native.
 
 > Get news headlines around the world with short description filtered by your interests category and search keyword. You can also save/unsave the stories.
 
-![mehnews](https://media.giphy.com/media/J4szaPLZsQIof2wMGT/giphy.gif)
+<p float="left">
+<img src="./images/1.jpg" width="180" height="360" />
+<img src="./images/2.jpg" width="180" height="360" />
+<img src="./images/3.jpg" width="180" height="360" />
+<img src="./images/4.jpg" width="180" height="360" />
+<img src="./images/5.jpg" width="180" height="360" />
+<img src="./images/6.jpg" width="180" height="360" />
+<img src="./images/7.jpg" width="180" height="360" />
+<img src="./images/8.jpg" width="180" height="360" />
+<img src="./images/9.jpg" width="180" height="360" />
+<img src="./images/10.jpg" width="180" height="360" />
+<img src="./images/11.jpg" width="180" height="360" />
+<img src="./images/12.jpg" width="180" height="360" />
+<img src="./images/13.jpg" width="180" height="360" />
+<img src="./images/14.jpg" width="180" height="360" />
+<img src="./images/15.jpg" width="180" height="360" />
+<img src="./images/16.jpg" width="180" height="360" />
+</p>
 
 ## Overview
 This NewsApp is built using React Native in which I have used different components to implement app interface and functionality. 
