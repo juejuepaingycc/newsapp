@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { IMAGE } from './constants/image';
-import Icon from 'react-native-vector-icons/AntDesign';
-
 import { connect } from 'react-redux'
 import { saveBooking, unsaveBooking } from './actions'
 import { Overlay, Button } from 'react-native-elements';
@@ -18,6 +16,18 @@ const Bookmark = ({ booked, saveBook, unsaveBook }) => {
         </TouchableOpacity>
 }
 
+const OverlayContent = ({ image, title, text }) => {
+    return <View
+        style={{
+            flex: 1, justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+        <Image source={image} style={styles.alertImage} />
+        <Text style={styles.alertTitle}>{title}</Text>
+        <Text style={styles.alertText}>{text}</Text>
+    </View>
+}
+
 const OverlayAlert = ({ isVisible, saved, hideAlert }) => {
     return <Overlay
         onBackdropPress={hideAlert}
@@ -27,34 +37,17 @@ const OverlayAlert = ({ isVisible, saved, hideAlert }) => {
             width: 250,
             padding: 16,
         }}>
-         <>
-         {
-            saved?
-                <View style={{
-                    flex: 1, justifyContent: 'center',
-                    alignItems: 'center'}}>
-                        <Image source={IMAGE.ICON_BOOKMARK_ADD} style={styles.alertImage} />
-                        <Text style={styles.alertTitle}>Story Saved!</Text>
-                        <Text style={styles.alertText}>
-                        See your saved stories in the Saved menu tab.
-                        </Text>
-                        </View>
-                :
-                <View style={{
-                    flex: 1, justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Image source={IMAGE.ICON_BOOKMARK_REMOVE} style={styles.alertImage} />
-                    <Text style={styles.alertTitle}>Story Unsaved!</Text>
-                    <Text style={styles.alertText}>
-                        This story has been removed from your saved stories.
-		  			</Text>
-                </View>
-        }
-        <Button onPress={hideAlert} title="Got it" buttonStyle={{ backgroundColor: '#44464a', marginLeft: 16, marginRight: 16 }} />
+        <>
+            {
+                saved ?
+                    <OverlayContent image={IMAGE.ICON_BOOKMARK_ADD} title={'Story Saved!'} text={'See your saved stories in the Saved menu tab.'} />
+                    :
+                    <OverlayContent image={IMAGE.ICON_BOOKMARK_REMOVE} title={'Story Unsaved!'} text={'This story has been removed from your saved stories.'} />
+            }
+            <Button onPress={hideAlert} title="Got it" buttonStyle={{ backgroundColor: '#44464a', marginLeft: 16, marginRight: 16 }} />
         </>
     </Overlay>
-  
+
 }
 
 class CustomHeader extends Component {
@@ -68,14 +61,9 @@ class CustomHeader extends Component {
         }
     }
 
-
-
     componentDidMount() {
-        if (this.props.icon) {
-            console.log("All News - Custom Header>>" + JSON.stringify(this.props.news.news));
-
+        if (this.props.icon) { //from News Detail page
             for (let i = 0; i < this.props.news.news.length; i++) {
-
                 if (this.props.news.news[i].url == this.props.passArticle.url) {
                     this.setState({ booked: this.props.news.news[i].booked });
                 }

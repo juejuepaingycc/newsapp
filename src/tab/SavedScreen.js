@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import Article from '../components/Article';
 import { FlatList, SafeAreaView, View, Text } from 'react-native';
 import { connect } from 'react-redux'
-import CustomHeader from '../CustomHeader'
 
-const SavedList = ({ fuck, navigation }) =>
+const SavedList = ({ list }) =>
 {
-    if (fuck !== null && fuck !== undefined && fuck.length > 0)
-   return <FlatList
-						data={fuck}
+    if (list !== null && list !== undefined && list.length > 0)
+        return <FlatList
+						data={list}
 						renderItem={({ item }) => <Article article={item.article} page={'saved'} />}
 						keyExtractor={item => item.url}
 					/>
     else 
-    return <Text style={{ fontSize: 30, color: 'gray', fontWeight: 'bold' }}>No Result Found!</Text>
+        return <Text style={{ fontSize: 30, color: 'gray', fontWeight: 'bold' }}>No Result Found!</Text>
 }
 export class SavedScreen extends Component {
 
@@ -21,27 +20,19 @@ export class SavedScreen extends Component {
         super(props);
     }
 
-	componentDidMount(){
-       
-	};
-
-
 	render() {
-
-        let fff = this.props.news.news;
-        let real = []
-        for(var i=0; i<fff.length;i ++){
-            if(fff[i].booked){
-                real.push(fff[i]);
+        let newsList = this.props.news.news;
+        let savedList = []
+        for(var i=0; i<newsList.length;i ++){
+            if(newsList[i].booked){
+                savedList.push(newsList[i]);
             }
         }
-        let { navigation } = this.props.navigation;
-        console.log("fff>>"+ JSON.stringify(fff))
+        console.log("newsList>>"+ JSON.stringify(newsList))
 		return (
 			<SafeAreaView style={{ flex: 1 }}>
-                 {/* <CustomHeader isHome={false} navigation={navigation} /> */}
 				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-					<SavedList fuck={real} />
+					<SavedList list={savedList} />
 				</View>
 			</SafeAreaView>
 		);
@@ -53,8 +44,7 @@ const mapStateToProps = (state) => {
         news: state
     }
 }
-
-export default connect(mapStateToProps, null)(SavedScreen)
+export default connect(mapStateToProps)(SavedScreen)
 
 
 

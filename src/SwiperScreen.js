@@ -5,7 +5,6 @@ import { IMAGE } from './constants/image';
 import SplashScreen from 'react-native-splash-screen'
 import { Button } from 'react-native-elements';
 
-
 export class SwiperScreen extends Component {
 
   componentDidMount() {
@@ -17,26 +16,15 @@ export class SwiperScreen extends Component {
     return (
       <Swiper loop={false}
         activeDot={
-          <View
-            style={{
-              backgroundColor: '#000',
-              width: 8,
-              height: 8,
-              borderRadius: 4,
-              marginLeft: 3,
-              marginRight: 3,
-              marginTop: 3,
-              marginBottom: 3
-            }}
-          />
+          <View style={styles.swiperBody} />
         }
       >
         <View testID="Hello" style={styles.slide1}>
-          <Text style={styles.text1}>Hey!</Text>
-          <Text style={styles.text2}>
-            We're excited to have you here. Thank you for joining us.
-          </Text>
-        </View>
+           <Text style={styles.text1}>Hey!</Text>
+           <Text style={styles.text2}>
+             We're excited to have you here. Thank you for joining us.
+           </Text>
+         </View>
 
         <View testID="Beautiful" style={styles.slide1}>
           <Text style={styles.text1}>Trial</Text>
@@ -65,6 +53,16 @@ export class SwiperScreen extends Component {
 
 
 const styles = StyleSheet.create({
+  swiperBody: {
+    backgroundColor: '#000',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3
+  },
   btn: {
     width: 280, borderRadius: 20, backgroundColor: '#44464a', marginTop: 70, marginLeft: 16, marginRight: 16
   },

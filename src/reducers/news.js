@@ -15,12 +15,6 @@ const news = (state = [], action) => {
                     ? { ...article, booked: false } :
                     article)
 
-        // case 'GET_STATUS':
-        //     return state.map(article =>
-        //         (article.url === action.url && )
-        //             ? true : null
-        //             )
-
         default:
             return state
     }

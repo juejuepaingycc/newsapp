@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import CustomHeader from '../CustomHeader';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
 import TopStoriesTab from './Topstories'
 import BusinessTab from './Business';
 import TechnologyTab from './Technology';
@@ -14,19 +13,19 @@ import EntertainmentTab from './Entertainment';
 const MaterialTopTabs = createMaterialTopTabNavigator();
 
 export class HomeScreen extends Component {
-    render() {
-        let { navigation } = this.props;
-        return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <CustomHeader title="Home" isHome={true} navigation={navigation}></CustomHeader>
-                <View style={{ flex: 1 }}>
-                    
-                <MaterialTopTabs.Navigator   tabBarOptions={{  
-            scrollEnabled : true,
+  render() {
+    let { navigation } = this.props;
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <CustomHeader title="Home" isHome={true} navigation={navigation}></CustomHeader>
+        <View style={{ flex: 1 }}>
+
+          <MaterialTopTabs.Navigator tabBarOptions={{
+            scrollEnabled: true,
             activeTintColor: 'white',
             //inactiveTintColor: 'gray',
-            style: {  
-                backgroundColor:'black',
+            style: {
+              backgroundColor: 'black',
             },
             labelStyle: {
               paddingLeft: 6,
@@ -39,9 +38,9 @@ export class HomeScreen extends Component {
             tabStyle: {
               width: 'auto',
             }
-          } 
+          }
           }>
-            <MaterialTopTabs.Screen  name="All" component={TopStoriesTab} />
+            <MaterialTopTabs.Screen name="All" component={TopStoriesTab} />
             <MaterialTopTabs.Screen name="Business" component={BusinessTab} />
             <MaterialTopTabs.Screen name="Health" component={HealthTab} />
             <MaterialTopTabs.Screen name="Technology" component={TechnologyTab} />
@@ -50,13 +49,8 @@ export class HomeScreen extends Component {
             <MaterialTopTabs.Screen name="Science" component={ScienceTab} />
           </MaterialTopTabs.Navigator>
 
-                </View>
-            </SafeAreaView>
-        );
-
-
-
-    
-
-    }
+        </View>
+      </SafeAreaView>
+    );
+  }
 }
