@@ -2,7 +2,7 @@
 
 NewsApp built using react native.
 
-> Get news headlines around the world with short description filtered by your interests category and search keyword 
+> Get news headlines around the world with short description filtered by your interests category and search keyword. You can also save/unsave the stories.
 
 ![mehnews](https://media.giphy.com/media/J4szaPLZsQIof2wMGT/giphy.gif)
 
@@ -18,11 +18,14 @@ This NewsApp is built using React Native in which I have used different componen
 ## Functionality 
 * Displays news headlines and news details around the world covering all categories
 * Search functionality
-* Signin/Signup/Logout
+* Save functionality
+* Signin/Signup UI
+* Logout
 
 ## Built With
 
 - react native
+- redux
 - react-navigation
 - react-native-elements
 - react-native-vector-icons
