@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { CustomHeader } from '../index';
+import CustomHeader from '../CustomHeader';
 import { StyleSheet, Button, View, SafeAreaView, Text, TextInput, ScrollView } from 'react-native';
 import { Image, ListItem } from 'react-native-elements';
 import moment from 'moment';
+
 
 export class Detail extends Component {
 
@@ -29,7 +30,7 @@ export class Detail extends Component {
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <CustomHeader title="" navigation={navigation}></CustomHeader>
+        <CustomHeader title="" navigation={navigation} icon={true} passArticle={pass} ></CustomHeader>
         <ScrollView style={styles.container}>
           <Image
             source={{ uri: pass.urlToImage }}

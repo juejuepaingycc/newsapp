@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { FlatList, View, SafeAreaView } from 'react-native';
 import { getArticles } from '../service/news';
-import Article from '../core/Article';
+import Article from '../components/Article';
 import { SearchBar } from 'react-native-elements';
-import { CustomHeader } from '../index';
+import CustomHeader from '../CustomHeader';
 
 export class SearchScreen extends Component{
 

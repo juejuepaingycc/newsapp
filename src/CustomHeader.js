@@ -1,12 +1,109 @@
 import React, { Component } from 'react';
-import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { IMAGE } from './constants/image';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-export class CustomHeader extends Component {
+import { connect } from 'react-redux'
+import { saveBooking, unsaveBooking } from './actions'
+import { Overlay, Button } from 'react-native-elements';
+
+const Bookmark = ({ booked, saveBook, unsaveBook }) => {
+    if (!booked)
+        return <TouchableOpacity onPress={saveBook}>
+            <Image source={IMAGE.ICON_BOOKMARK} style={styles.bookmark} resizeMode="contain" />
+        </TouchableOpacity>
+    else
+        return <TouchableOpacity onPress={unsaveBook}>
+            <Image source={IMAGE.ICON_BOOKMARK_BLACK} style={styles.bookmark} resizeMode="contain" />
+        </TouchableOpacity>
+}
+
+const OverlayAlert = ({ isVisible, saved, hideAlert }) => {
+    return <Overlay
+        onBackdropPress={hideAlert}
+        isVisible={isVisible}
+        overlayStyle={{
+            height: 350,
+            width: 250,
+            padding: 16,
+        }}>
+         <>
+         {
+            saved?
+                <View style={{
+                    flex: 1, justifyContent: 'center',
+                    alignItems: 'center'}}>
+                        <Image source={IMAGE.ICON_BOOKMARK_ADD} style={styles.alertImage} />
+                        <Text style={styles.alertTitle}>Story Saved!</Text>
+                        <Text style={styles.alertText}>
+                        See your saved stories in the Saved menu tab.
+                        </Text>
+                        </View>
+                :
+                <View style={{
+                    flex: 1, justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Image source={IMAGE.ICON_BOOKMARK_REMOVE} style={styles.alertImage} />
+                    <Text style={styles.alertTitle}>Story Unsaved!</Text>
+                    <Text style={styles.alertText}>
+                        This story has been removed from your saved stories.
+		  			</Text>
+                </View>
+        }
+        <Button onPress={hideAlert} title="Got it" buttonStyle={{ backgroundColor: '#44464a', marginLeft: 16, marginRight: 16 }} />
+        </>
+    </Overlay>
+  
+}
+
+class CustomHeader extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            booked: false,
+            isVisible: false,
+            saved: false
+        }
+    }
+
+
+
+    componentDidMount() {
+        if (this.props.icon) {
+            console.log("All News - Custom Header>>" + JSON.stringify(this.props.news.news));
+
+            for (let i = 0; i < this.props.news.news.length; i++) {
+
+                if (this.props.news.news[i].url == this.props.passArticle.url) {
+                    this.setState({ booked: this.props.news.news[i].booked });
+                }
+            }
+        }
+    }
+
+    saveBook = () => {
+        console.log("Article to save>>" + JSON.stringify(this.props.passArticle))
+        this.props.saveArticle(this.props.passArticle);
+        this.setState({ booked: true, isVisible: true, saved: true })
+    }
+
+    unsaveBook = () => {
+        console.log("Article to unsave>>" + JSON.stringify(this.props.passArticle.url))
+        this.props.unsaveArticle(this.props.passArticle.url);
+        this.setState({ booked: false, isVisible: true, saved: false })
+    }
+
+    removeOverlay() {
+        this.setState({ isVisible: false })
+    }
+
     render() {
-        let { navigation, isHome, title } = this.props;
+        let { navigation, isHome, title, icon } = this.props;
         return (
-            <View style={{ flexDirection: 'row', height: 50 }}>
+            <SafeAreaView style={{ flexDirection: 'row', justifyContent: 'space-evenly', height: 50 }}>
+                <OverlayAlert isVisible={this.state.isVisible} saved={this.state.saved} hideAlert={() => this.removeOverlay()} />
                 <View style={styles.nav}>
                     {
                         isHome ?
@@ -14,8 +111,8 @@ export class CustomHeader extends Component {
                                 <Image source={IMAGE.ICON_MENU} style={styles.menu} resizeMode="contain" />
                             </TouchableOpacity>
                             :
-                            <TouchableOpacity style={styles.backView} 
-                            onPress={() => navigation.goBack()}
+                            <TouchableOpacity style={styles.backView}
+                                onPress={() => navigation.goBack()}
                             >
                                 <Image source={IMAGE.ICON_BACK} style={styles.back} resizeMode="contain" />
                                 <Text>Back</Text>
@@ -25,19 +122,63 @@ export class CustomHeader extends Component {
                 <View style={styles.titleView}>
                     <Text style={styles.title}>{title}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1 }} style={styles.book} >
+                    {
+                        icon
+                            ?
+                            <Bookmark booked={this.state.booked} saveBook={() => this.saveBook()} unsaveBook={() => this.unsaveBook()} />
+                            :
+                            null
+                    }
+
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        news: state
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveArticle: (article) => dispatch(saveBooking(article)),
+        unsaveArticle: (url) => dispatch(unsaveBooking(url))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomHeader)
+
 const styles = StyleSheet.create({
+    alertTitle: {
+        fontWeight: 'bold',
+        fontSize: 25,
+        textAlign: 'center',
+        paddingTop: 20
+    },
+    alertImage: {
+
+    },
+    alertText: {
+        fontSize: 18,
+        paddingTop: 20
+    },
+    bookmark: {
+        width: 36,
+        height: 35
+    },
+    book: {
+        paddingTop: 13,
+        paddingRight: 10
+    },
     title: {
         fontSize: 20, fontWeight: 'bold'
     },
     titleView: {
-        flex: 1.5, justifyContent: 'center', alignItems: 'center'
+        flex: 7, justifyContent: 'center', alignItems: 'center'
     },
     back: {
         width: 25, height: 25, marginLeft: 5

@@ -8,9 +8,17 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { SwiperScreen, CustomDrawerContent } from './src';
 import { HomeScreen, SearchScreen, Detail } from './src/tab';
+import SavedScreen from './src/tab/SavedScreen'
 import { SigninScreen, SignupScreen } from './src/auth';
 import { IMAGE } from './src/constants/image';
 
+//import store from './src/store'
+import { Provider } from 'react-redux'
+
+import { createStore } from 'redux'
+import rootReducer from './src/reducers'
+
+const store = createStore(rootReducer)
 const Tab = createBottomTabNavigator();
 
 const navOptionHandler = () => ({
@@ -18,12 +26,23 @@ const navOptionHandler = () => ({
 })
 
 const StackHome = createStackNavigator();
+const StackSaved = createStackNavigator();
+
 function HomeStack() {
   return (
     <StackHome.Navigator initialRouteName="Home">
       <StackHome.Screen name="Home" component={HomeScreen} options={navOptionHandler} />
       <StackHome.Screen name="Detail" component={Detail} options={navOptionHandler} />
     </StackHome.Navigator>
+  );
+}
+
+function SavedStack() {
+  return (
+    <StackSaved.Navigator initialRouteName="Saved">
+      <StackSaved.Screen name="Saved" component={SavedScreen} options={navOptionHandler} />
+      <StackSaved.Screen name="Detail" component={Detail} options={navOptionHandler} />
+    </StackSaved.Navigator>
   );
 }
 
@@ -42,6 +61,11 @@ function TabNavigator() {
               IMAGE.ICON_SEARCH_BLACK
               : IMAGE.ICON_SEARCH
           }
+          // else if (route.name === 'Saved') {
+          //   iconName = focused ?
+          //     IMAGE.ICON_BOOKMARK_BLACK
+          //     : IMAGE.ICON_BOOKMARK
+          // }
           return <Image source={iconName} style={{ width: 20, height: 20 }}
             resizeMode="contain"
           />
@@ -65,6 +89,7 @@ function DrawerNavigator({ navigation }) {
       initialRouteName="MenuTab"
       drawerContent={() => <CustomDrawerContent navigation={navigation} />} >
       <Drawer.Screen name="MenuTab" component={TabNavigator} />
+      <Drawer.Screen name="Saved" children={SavedStack} />
       <Drawer.Screen name="Signin" component={SigninScreen} />
       <Drawer.Screen name="Signup" component={SignupScreen} />
     </Drawer.Navigator>
@@ -74,11 +99,13 @@ function DrawerNavigator({ navigation }) {
 const StackApp = createStackNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
+    <Provider store={store}>
+<NavigationContainer>
       <StackApp.Navigator initialRouteName="Swiper2">
         <StackApp.Screen name="HomeApp" component={DrawerNavigator} options={navOptionHandler} />
         <StackApp.Screen name="Swiper2" component={SwiperScreen} options={navOptionHandler} />
       </StackApp.Navigator>
     </NavigationContainer>
+  </Provider>
   );
 }

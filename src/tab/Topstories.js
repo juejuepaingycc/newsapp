@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, Image, SafeAreaView, StyleSheet } from 'react-native';
 import { getArticles } from '../service/news';
-import Article from '../core/Article';
+import Article from '../components/Article';
 import { View, Text } from 'react-native';
 import { IMAGE } from '../constants/image';
 import { Overlay, Button } from 'react-native-elements';

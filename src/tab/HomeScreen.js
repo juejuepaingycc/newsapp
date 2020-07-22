@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
-import { CustomHeader } from '../index';
+import CustomHeader from '../CustomHeader';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import TopStoriesTab from './Topstories'

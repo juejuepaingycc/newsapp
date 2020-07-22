@@ -3,15 +3,12 @@ import { View, TouchableHighlight, StyleSheet } from 'react-native';
 import { Text, Card, Divider } from 'react-native-elements';
 import moment from 'moment';
 
-const Article = (props) => {
-
+const ArticleCard = ( { props } ) => {
+	
 	const time = moment(props.article.publishedAt || moment.now()).fromNow();
 	const img = props.article.urlToImage
-	const article = props.article;
-
-	return (
-		<TouchableHighlight onPress={() => props.navigation.navigate('Detail', { pass: article })}>
-			<Card
+	
+	return <Card
 				title={props.article.title}
 				titleStyle={{
 					textAlign: 'left',
@@ -37,7 +34,27 @@ const Article = (props) => {
 					</Text>
 				</View>
 			</Card>
+}
+
+const Article = (props) => {
+
+	const nav = props.navigation;
+	const article = props.article;
+	const saved = props.page == 'saved' ? true: false;
+	return (
+		<View>
+		{
+			saved?
+			<TouchableHighlight>
+			<ArticleCard props={props} />
 		</TouchableHighlight>
+		:
+		<TouchableHighlight onPress={() => nav.navigate('Detail', { pass: article })}>
+		<ArticleCard props={props} />
+	</TouchableHighlight>
+		}
+		</View>
+	
 	);
 }
 

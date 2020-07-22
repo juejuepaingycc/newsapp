@@ -14,5 +14,9 @@ const IMAGE = {
     ICON_REGISTER: require('../images/register.png'),
     ICON_LOGOUT: require('../images/logout.png'),
     ICON_GIRL: require('../images/girl.png'),
+    ICON_BOOKMARK: require('../images/bookmark.png'),
+    ICON_BOOKMARK_BLACK: require('../images/bookmark-black.png'),
+    ICON_BOOKMARK_ADD: require('../images/bookmark-add.png'),
+    ICON_BOOKMARK_REMOVE: require('../images/bookmark-remove.png'),
 }
 export { IMAGE }

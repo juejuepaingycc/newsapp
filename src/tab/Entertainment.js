@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, SafeAreaView, View } from 'react-native';
 import { getArticles } from '../service/news';
-import Article from '../core/Article';
+import Article from '../components/Article';
 
 export default class EntertainmentTab extends Component {
 

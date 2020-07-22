@@ -5,6 +5,7 @@ export async function getArticles(category, search) {
         let result = await articles.json();
         articles = null;
         return result.articles;
+
     }
     catch(error){
         throw error;

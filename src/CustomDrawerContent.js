@@ -39,6 +39,12 @@ export class CustomDrawerContent extends Component {
             <Text style={styles.caption}>Home</Text>
           </TouchableOpacity>
 
+          <TouchableOpacity style={styles.row} onPress={() => navigation.navigate("Saved")}>
+            <Image source={IMAGE.ICON_BOOKMARK}
+              style={styles.img} />
+            <Text style={styles.caption}>Saved</Text>
+          </TouchableOpacity>
+
          <TouchableOpacity style={styles.row} onPress={() => navigation.navigate("Signin")}>
             <Image source={IMAGE.ICON_LOGIN} style={styles.img} />
             <Text style={styles.caption}>Signin</Text>

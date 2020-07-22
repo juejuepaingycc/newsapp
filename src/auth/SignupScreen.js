@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, TextInput, Picker, View, SafeAreaView } from 'react-native';
-import { CustomHeader } from '../index';
+import CustomHeader from '../CustomHeader';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Input, Button, CheckBox } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
